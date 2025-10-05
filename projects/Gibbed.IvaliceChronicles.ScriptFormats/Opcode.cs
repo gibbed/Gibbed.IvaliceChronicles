@@ -40,150 +40,150 @@ namespace Gibbed.IvaliceChronicles.ScriptFormats
         Unknown0D,
         Unknown0E,
         Unknown0F,
-        DisplayMessage, // 10
-        UnitAnim, // 11
-        Unknown12,
-        ChangeMapBeta, // 13 - same handler as 4C
+        MessagePutMain, // 10
+        AnimationRequest, // 11
+        WaitAnimationEnd, // 12
+        JumpMap, // 13 - same handler as 4C
         Unknown14,
         Unknown15,
-        Pause, // 16
+        WaitTask, // 16
         Unknown17,
-        Effect, // 18
-        Camera, // 19
-        MapDarkness, // 1A
-        MapLight, // 1B
-        EventSpeed, // 1C
-        CameraFusionStart, // 1D
-        CameraFusionEnd, // 1E
-        Focus, // 1F
-        SoundEffect, // 20
-        SwitchTrack, // 21
-        Unknown22, // 22 - same handler as F0
+        ChangeEffect, // 18
+        MoveCamera, // 19
+        MoveAmbient, // 1A
+        MoveLight, // 1B
+        ChangeFrameRate, // 1C
+        _CameraFusionStart, // 1D
+        _CameraFusionEnd, // 1E
+        _Focus, // 1F
+        Unknown20, // 20
+        PlaySound, // 21
+        PlayMusic, // 22 - same handler as F0
         Unknown23,
         Unknown24,
         Unknown25,
         Unknown26,
-        ReloadMapState, // 27
-        WalkTo, // 28
-        WaitWalk, // 29
-        BlockStart, // 2A
-        BlockEnd, // 2B
-        FaceUnit2, // 2C
-        RotateUnit, // 2D
-        Background, // 2E
+        RewriteMap, // 27
+        MoveToPanel, // 28
+        WaitCharacterMove, // 29
+        _BlockStart, // 2A
+        _BlockEnd, // 2B
+        Direction2_0, // 2C
+        Direction, // 2D
+        FadeGradation, // 2E
         Unknown2F,
         Unknown30,
-        ColorBGBeta, // 31
-        ColorUnit, // 32
-        ColorField, // 33
+        ChangeGradation, // 31
+        SetCharacterColor, // 32
+        ChangeMapClut, // 33
         Unknown34,
         Unknown35,
         Unknown36,
         Unknown37,
-        FocusSpeed, // 38
-        Unknown39,
-        Unknown3A,
-        SpriteMove, // 3B
-        Weather, // 3C
-        RemoveUnit, // 3D
-        ColorScreen, // 3E
-        Unknown3F,
-        Unknown40,
-        EarthquakeStart, // 41
-        EarthquakeEnd, // 42
-        CallFunction, // 43
-        Draw, // 44
-        AddUnit, // 45
-        Erase, // 46
-        AddGhostUnit, // 47
-        WaitAddUnit, // 48
-        AddUnitStart, // 49
-        AddUnitEnd, // 4A
-        WaitAddUnitEnd, // 4B
-        ChangeMap, // 4C - same handler as 13
-        Reveal, // 4D
-        UnitShadow, // 4E
+        _FocusSpeed, // 38
+        WaitCharacterMoveWotL, // 39
+        WaitFileRead, // 3A
+        MoveSprite, // 3B - same handler as 6E?
+        ChangeWeather, // 3C
+        DisappearUnit, // 3D
+        SetChangePaletteData, // 3E
+        ChangeMapD, // 3F
+        ChangeMapSTP, // 40
+        StartShake, // 41
+        StopShake, // 42
+        _CallFunction, // 43
+        _Draw, // 44
+        LoadAnimation, // 45
+        DeactivateAnimation, // 46
+        ActivateAnimation, // 47
+        WaitLoadAnimation, // 48
+        ActivateAnimationStart, // 49
+        ActivateAnimationEnd, // 4A
+        WaitActivateAnimation, // 4B
+        JumpMap2, // 4C - same handler as 13
+        _Reveal, // 4D
+        SetAnimationShadow, // 4E
         SetDaytime, // 4F
-        PortraitCol, // 50
-        ChangeDialog, // 51
+        SetFace, // 50
+        _ChangeDialog, // 51
         Unknown52,
-        FaceUnit, // 53
-        Use3DObject, // 54
-        UseFieldObject, // 55
-        Wait3DObject, // 56
-        WaitFieldObject, // 57
-        LoadEVTCHR, // 58
-        SaveEVTCHR, // 59
-        SaveEVTCHRClear, // 5A
-        LoadEVTCHRClear, // 5B
-        Unknown5C,
-        Unknown5D,
-        EndTrack, // 5E
-        WarpUnit, // 5F
-        FadeSound, // 60
-        Unknown61,
-        Unknown62,
-        CameraSpeedCurve, // 63
-        WaitRotateUnit, // 64
-        WaitRotateAll, // 65
-        Unknown66,
+        Direction2_1, // 53
+        StartModelAnimation, // 54
+        StartVRAMAnimation, // 55
+        WaitModelAnimation, // 56
+        WaitVRAMAnimation, // 57
+        LoadEventCharacter, // 58
+        ActivateEventCharacter, // 59
+        DeactivateEventCharacter, // 5A
+        DisposeEventCharacter, // 5B
+        ActivateCompressedAnimation, // 5C
+        DeactivateCompressedAnimation, // 5D
+        DisposeMusic, // 5E
+        SetAnimationPosition, // 5F
+        FadeMusic, // 60
+        Unknown61, // 61
+        Unknown62, // 62
+        SetMoveCameraFlags, // 63
+        WaitDirection, // 64
+        WaitDirectionAll, // 65
+        SetPresentClutDataAsDefault, // 66 - choose better name
         Unknown67,
-        MirrorSprite, // 68
-        FaceTile, // 69
-        EditBGSound, // 6A
-        BGSound, // 6B
-        Unknown6C,
-        Unknown6D,
-        SpriteMoveBeta, // 6E
-        WaitSpriteMove, // 6F
-        Jump, // 70
-        Unknown71,
-        Unknown72,
+        SetAnimationHorizontalFlip, // 68
+        Direction4, // 69
+        FadeSoundEffect, // 6A
+        PlaySoundEffect, // 6B
+        SetAnimationColorChangeOff, // 6C
+        SetAnimationColorChangeOn, // 6D
+        MoveSprite2, // 6E
+        WaitMoveSprite, // 6F
+        JumpToPanel, // 70
+        RaiseAnimationPriority, // 71
+        ForceStop, // 72 - unused?
         Unknown73,
         Unknown74,
         Unknown75,
-        DarkScreen, // 76
-        RemoveDarkScreen, // 77
-        DisplayConditions, // 78
-        WalkToAnim, // 79
-        DismissUnit, // 7A
-        Unknown7B,
-        Unknown7C,
-        ShowGraphic, // 7D
-        WaitValue, // 7E
-        EVTCHRPalette, // 7F
-        March, // 80
-        Unknown81,
-        Unknown82,
-        ChangeStats, // 83
-        PlayTune, // 84
-        UnlockDate, // 85
-        TempWeapon, // 86
-        Arrow, // 87
-        MapUnfreeze, // 88
-        MapFreeze, // 89
-        EffectStart, // 8A
-        EffectEnd, // 8B
-        UnitAnimRotate, // 8C
-        Unknown8D,
-        WaitGraphicPrint, // 8E
-        Unknown8F,
-        Unknown90,
-        ShowMapTitle, // 91
-        InflictStatus, // 92
-        Unknown93,
+        StartWipe, // 76
+        StopWipe, // 77
+        _DisplayConditions, // 78
+        _WalkToAnim, // 79
+        EraseUnit, // 7A
+        Unknown7B, // 7B - valid in WotL
+        StopAllEffects, // 7C
+        DisplayChapter, // 7D
+        WaitEventFlag, // 7E
+        SetEventCharacterClut, // 7F
+        RequestStandardAnimation, // 80
+        SetAnimationSoundOnOff, // 81
+        Unknown82, // 82
+        _ChangeStats, // 83
+        PlayJingle, // 84
+        ChangeTreasureFindDay, // 85
+        EquipWeapon, // 86
+        UseGun, // 87
+        RestartMapPaletteAnimation, // 88
+        StopMapPaletteAnimation, // 89
+        WaitEffectLoad, // 8A
+        PlayEffect, // 8B
+        SetAnimationFlipDirection, // 8C
+        Unknown8D, // 8D
+        WaitDisplayChapter, // 8E
+        Unknown8F, // 8F - allgrayf
+        WaitActivePanel, // 90 - waits for active panel x/y to match args
+        DisplayMapTitle, // 91
+        _InflictStatus, // 92
+        Unknown93, // 93
         TeleportOut, // 93
-        Unknown95,
-        AppendMapState, // 96
-        ResetPalette, // 97
+        Unknown95, // 95
+        _AppendMapState, // 96
+        SetAnimationBrightColor, // 97
         TeleportIn, // 98
-        BlueRemoveUnit, // 99
-        Unknown9A,
-        Unknown9B,
-        Unknown9C,
-        Unknown9D,
-        Unknown9E,
-        Unknown9F,
+        _BlueRemoveUnit, // 99
+        Unknown9A, // 9A
+        Unknown9B, // 9B
+        Unknown9C, // 9C
+        Unknown9D, // 9D
+        Unknown9E, // 9E
+        Unknown9F, // 9F
         LessThanEquals, // A0
         GreaterThanEquals, // A1
         Equals, // A2
@@ -215,45 +215,45 @@ namespace Gibbed.IvaliceChronicles.ScriptFormats
         Or, // BC
         OrVar, // BD
         Zero, // BE
-        UnknownBF,
-        UnknownC0,
-        UnknownC1,
-        UnknownC2,
-        UnknownC3,
-        UnknownC4,
-        UnknownC5,
-        UnknownC6,
-        UnknownC7,
-        UnknownC8,
-        UnknownC9,
-        UnknownCA,
-        UnknownCB,
-        UnknownCC,
-        UnknownCD,
-        UnknownCE,
-        UnknownCF,
-        JumpForwardIfZero, // D0
-        JumpForward, // D1
-        ForwardTarget, // D2
-        JumpBack, // D3
-        UnknownD4,
-        BackTarget, // D5
+        UnknownBF, // BF
+        UnknownC0, // C0
+        UnknownC1, // C1
+        UnknownC2, // C2
+        UnknownC3, // C3
+        UnknownC4, // C4
+        UnknownC5, // C5
+        UnknownC6, // C6
+        UnknownC7, // C7
+        UnknownC8, // C8
+        UnknownC9, // C9
+        UnknownCA, // CA
+        UnknownCB, // CB
+        UnknownCC, // CC
+        UnknownCD, // CD
+        UnknownCE, // CE
+        UnknownCF, // CF
+        SeekCodeForwardIfZero, // D0
+        SeekCodeForward, // D1
+        SeekCodeForwardTarget, // D2
+        SeekCodeBackward, // D3
+        UnknownD4, // D4
+        SeekCodeBackwardTarget, // D5
         UnknownD6,
         UnknownD7,
         UnknownD8,
         UnknownD9,
         UnknownDA,
-        EventEnd, // DB - same handler as E3
-        UnknownDC,
+        _EventEnd, // DB - same handler as E3
+        UnknownDC, // DC - errorf = 13; unused?
         UnknownDD,
         UnknownDE,
         UnknownDF,
         UnknownE0,
         UnknownE1,
         UnknownE2,
-        EventEnd2, // E3 - same handler as DB
+        _EventEnd2, // E3 - same handler as DB
         UnknownE4,
-        WaitForInstruction, // E5
+        _WaitForInstruction, // E5
         UnknownE6,
         UnknownE7,
         UnknownE8,
@@ -265,7 +265,7 @@ namespace Gibbed.IvaliceChronicles.ScriptFormats
         UnknownEE,
         UnknownEF,
         UnknownF0, // F0 - same handler as 22
-        Wait, // F1
-        Pad, // F2
+        _Wait, // F1
+        _Pad, // F2
     }
 }
