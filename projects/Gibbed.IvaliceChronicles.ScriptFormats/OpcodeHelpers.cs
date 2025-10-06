@@ -44,7 +44,7 @@ namespace Gibbed.IvaliceChronicles.ScriptFormats
             Opcode.Unknown0D => 0,
             Opcode.Unknown0E => 0,
             Opcode.Unknown0F => 0,
-            Opcode.MessagePutMain => 14,
+            Opcode.DisplayMessage => 14,
             Opcode.AnimationRequest => 5,
             Opcode.WaitAnimationEnd => 2,
             Opcode.JumpMap => 2,
@@ -157,7 +157,7 @@ namespace Gibbed.IvaliceChronicles.ScriptFormats
             Opcode.WaitEventFlag => 4,
             Opcode.SetEventCharacterClut => 4,
             Opcode.RequestStandardAnimation => 3,
-            Opcode.SetAnimationSoundOnOff => 3,
+            Opcode.SetAnimationSound => 3,
             Opcode.Unknown82 => 0,
             Opcode._ChangeStats => 5,
             Opcode.PlayJingle => 1,
@@ -240,7 +240,7 @@ namespace Gibbed.IvaliceChronicles.ScriptFormats
             Opcode.SeekCodeForward => 1,
             Opcode.SeekCodeForwardTarget => 1,
             Opcode.SeekCodeBackward => 1,
-            Opcode.UnknownD4 => 1,
+            Opcode.Terminate => 1,
             Opcode.SeekCodeBackwardTarget => 1,
             Opcode.UnknownD6 => 0,
             Opcode.UnknownD7 => 0,
@@ -258,7 +258,7 @@ namespace Gibbed.IvaliceChronicles.ScriptFormats
             Opcode._EventEnd2 => 0,
             Opcode.UnknownE4 => 1,
             Opcode._WaitForInstruction => 2,
-            Opcode.UnknownE6 => 0,
+            Opcode.UnknownE6 => throw new NotSupportedException(), // dynamic size
             Opcode.UnknownE7 => 4,
             Opcode.UnknownE8 => 1,
             Opcode.UnknownE9 => 8,
@@ -278,9 +278,9 @@ namespace Gibbed.IvaliceChronicles.ScriptFormats
 
         public static int GetEnhancedExtraSize(this Opcode opcode) => opcode switch
         {
-            Opcode.MessagePutMain => 3,
+            Opcode.DisplayMessage => 3,
             Opcode._ChangeDialog => 2,
-            Opcode.UnknownEB => 5,
+            Opcode.UnknownEB => 4,
             _ => 0,
         };
 

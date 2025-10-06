@@ -52,11 +52,11 @@ namespace Gibbed.IvaliceChronicles.ScriptFormats
             Opcode.Unknown0D => Invalid,
             Opcode.Unknown0E => Invalid,
             Opcode.Unknown0F => Invalid,
-            Opcode.MessagePutMain => () => isEnhanced == false
+            Opcode.DisplayMessage => () => isEnhanced == false
                 ? _(U8, U8, U16, U8, U8, U8, S16, S16, S16, U8)
                 : _(U8, U8, U32, U8, U8, U8, S16, S16, S16, U8, U8),
-            Opcode.AnimationRequest => Unknown, // () => _(U8, U8, U8, U8), // FFHacktics wiki claims 4 bytes, but size is 5? 
-            Opcode.WaitAnimationEnd => Unknown,
+            Opcode.AnimationRequest => () => _(U16, U16, U8), // FFHacktics wiki claims 4 bytes, but size is 5?
+            Opcode.WaitAnimationEnd => () => _(U16),
             Opcode.JumpMap => () => _(U8, U8),
             Opcode.Unknown14 => Invalid,
             Opcode.Unknown15 => Invalid,
@@ -70,9 +70,9 @@ namespace Gibbed.IvaliceChronicles.ScriptFormats
             Opcode._CameraFusionStart => None,
             Opcode._CameraFusionEnd => None, // handler not in main code?
             Opcode._Focus => () => _(U8, U8, U8, U8, U8),
-            Opcode.Unknown20 => Invalid, // handler removed? FFhacktics wiki claims 2 bytes, but size is 6?
-            Opcode.PlaySound => Unknown, // FFhacktics wiki claims 3 bytes, but size is 2?
-            Opcode.PlayMusic => Unknown,
+            Opcode.Unknown20 => Invalid, // handler removed?
+            Opcode.PlaySound => () => _(U16),
+            Opcode.PlayMusic => () => _(U8, S8, U8),
             Opcode.Unknown23 => Strange,
             Opcode.Unknown24 => Strange,
             Opcode.Unknown25 => Unknown,
@@ -95,15 +95,15 @@ namespace Gibbed.IvaliceChronicles.ScriptFormats
             Opcode.Unknown36 => Invalid,
             Opcode.Unknown37 => () => _(U16),
             Opcode._FocusSpeed => () => _(U16),
-            Opcode.WaitCharacterMoveWotL => Unknown,
-            Opcode.WaitFileRead => Unknown,
-            Opcode.MoveSprite => () => _(U8, U8, S16, S16, S16, U8, U8, S16),
+            Opcode.WaitCharacterMoveWotL => None,
+            Opcode.WaitFileRead => None,
+            Opcode.MoveSprite => MoveSprite,
             Opcode.ChangeWeather => () => _(U8, U8),
             Opcode.DisappearUnit => () => _(U8, U8),
             Opcode.SetChangePaletteData => () => _(U8, U8, U8, U8, U8, U8, U8, S16),
             Opcode.ChangeMapD => () => _(U8, U8, U8, U8),
             Opcode.ChangeMapSTP => () => _(U8, U8, U8, U8, U8),
-            Opcode.StartShake => None,
+            Opcode.StartShake => () => _(U8, U8, U8, U8),
             Opcode.StopShake => None,
             Opcode._CallFunction => () => _(U8),
             Opcode._Draw => () => _(U8, U8),
@@ -115,85 +115,85 @@ namespace Gibbed.IvaliceChronicles.ScriptFormats
             Opcode.ActivateAnimationEnd => None, // handler not in main code?
             Opcode.WaitActivateAnimation => None,
             Opcode.JumpMap2 => () => _(U8, U8),
-            Opcode._Reveal => Unknown,
-            Opcode.SetAnimationShadow => Unknown,
-            Opcode.SetDaytime => Unknown,
-            Opcode.SetFace => Unknown,
+            Opcode._Reveal => () => _(U8),
+            Opcode.SetAnimationShadow => () => _(U8, U8, U8),
+            Opcode.SetDaytime => () => _(U8),
+            Opcode.SetFace => () => _(U8),
             Opcode._ChangeDialog => isEnhanced == false
                 ? () => _(U8, U16, U16)
                 : () => _(U8, S32, U16),
             Opcode.Unknown52 => Invalid,
-            Opcode.Direction2_1 => Unknown,
-            Opcode.StartModelAnimation => Unknown,
-            Opcode.StartVRAMAnimation => Unknown,
+            Opcode.Direction2_1 => () => _(U8, U8, U8, U8, U8, U8, U8),
+            Opcode.StartModelAnimation => () => _(U8, U8),
+            Opcode.StartVRAMAnimation => () => _(U8, U8),
             Opcode.WaitModelAnimation => None,
             Opcode.WaitVRAMAnimation => None,
-            Opcode.LoadEventCharacter => Unknown,
-            Opcode.ActivateEventCharacter => Unknown,
-            Opcode.DeactivateEventCharacter => Unknown,
-            Opcode.DisposeEventCharacter => Unknown,
-            Opcode.ActivateCompressedAnimation => Unknown,
-            Opcode.DeactivateCompressedAnimation => Unknown,
-            Opcode.DisposeMusic => Unknown,
-            Opcode.SetAnimationPosition => Unknown,
-            Opcode.FadeMusic => Unknown,
+            Opcode.LoadEventCharacter => () => _(U8, U8, U8),
+            Opcode.ActivateEventCharacter => () => _(U8),
+            Opcode.DeactivateEventCharacter => () => _(U8),
+            Opcode.DisposeEventCharacter => () => _(U8),
+            Opcode.ActivateCompressedAnimation => () => _(U16, U8),
+            Opcode.DeactivateCompressedAnimation => () => _(U8),
+            Opcode.DisposeMusic => () => _(U8),
+            Opcode.SetAnimationPosition => () => _(U8, U8, U8, U8, U8, U8),
+            Opcode.FadeMusic => () => _(U8, U8),
             Opcode.Unknown61 => Strange,
             Opcode.Unknown62 => () => _(U16, U8, U8, U8, U8), // not totally confident
-            Opcode.SetMoveCameraFlags => Unknown,
-            Opcode.WaitDirection => Unknown,
+            Opcode.SetMoveCameraFlags => () => _(U8),
+            Opcode.WaitDirection => () => _(U8, U8),
             Opcode.WaitDirectionAll => None,
             Opcode.SetPresentClutDataAsDefault => None,
             Opcode.Unknown67 => Invalid,
             Opcode.SetAnimationHorizontalFlip => () => _(U16, U8),
-            Opcode.Direction4 => Unknown,
-            Opcode.FadeSoundEffect => Unknown,
-            Opcode.PlaySoundEffect => Unknown,
-            Opcode.SetAnimationColorChangeOff => Unknown,
-            Opcode.SetAnimationColorChangeOn => Unknown,
-            Opcode.MoveSprite2 => Unknown,
-            Opcode.WaitMoveSprite => Unknown,
-            Opcode.JumpToPanel => Unknown,
-            Opcode.RaiseAnimationPriority => Unknown,
+            Opcode.Direction4 => () => _(U8, U8, U8, U8, U8, U8, U8, U8),
+            Opcode.FadeSoundEffect => () => _(U8, S8, S8, U8, U8),
+            Opcode.PlaySoundEffect => () => _(U8, S8, S8, U8, U8),
+            Opcode.SetAnimationColorChangeOff => () => _(U16),
+            Opcode.SetAnimationColorChangeOn => () => _(U16),
+            Opcode.MoveSprite2 => MoveSprite,
+            Opcode.WaitMoveSprite => () => _(U8, U8),
+            Opcode.JumpToPanel => () => _(U8, U8, U8, U8),
+            Opcode.RaiseAnimationPriority => () => _(U16),
             Opcode.ForceStop => None,
-            Opcode.Unknown73 => Unknown,
+            Opcode.Unknown73 => () => _(U16, U16, U16, U16, U16, U16, U16),
             Opcode.Unknown74 => Strange,
             Opcode.Unknown75 => Strange,
-            Opcode.StartWipe => Unknown,
+            Opcode.StartWipe => () => _(U8, U8, U8, U8, U8, U8),
             Opcode.StopWipe => None,
-            Opcode._DisplayConditions => Unknown,
-            Opcode._WalkToAnim => Unknown,
-            Opcode.EraseUnit => Unknown,
-            Opcode.Unknown7B => Unknown,
+            Opcode._DisplayConditions => () => _(U8, U8),
+            Opcode._WalkToAnim => () => _(U16, U16), // FFHacktics wiki claims 3 bytes, but size is 4?
+            Opcode.EraseUnit => () => _(U8, U8),
+            Opcode.Unknown7B => () => _(U16),
             Opcode.StopAllEffects => None,
-            Opcode.DisplayChapter => Unknown,
-            Opcode.WaitEventFlag => Unknown,
-            Opcode.SetEventCharacterClut => Unknown,
-            Opcode.RequestStandardAnimation => Unknown,
-            Opcode.SetAnimationSoundOnOff => Unknown,
+            Opcode.DisplayChapter => () => _(U8),
+            Opcode.WaitEventFlag => () => _(U16, U16),
+            Opcode.SetEventCharacterClut => () => _(U8, U8, U8, U8),
+            Opcode.RequestStandardAnimation => () => _(U8, U8, U8),
+            Opcode.SetAnimationSound => () => _(U16, OffOn),
             Opcode.Unknown82 => None,
-            Opcode._ChangeStats => Unknown,
-            Opcode.PlayJingle => Unknown,
-            Opcode.ChangeTreasureFindDay => Unknown,
-            Opcode.EquipWeapon => Unknown,
+            Opcode._ChangeStats => () => _(U8, U8, U8, S16),
+            Opcode.PlayJingle => () => _(U8),
+            Opcode.ChangeTreasureFindDay => () => _(U8),
+            Opcode.EquipWeapon => () => _(U8, U8, U8),
             Opcode.UseGun => () => _(U16, U16),
             Opcode.RestartMapPaletteAnimation => None,
             Opcode.StopMapPaletteAnimation => None,
             Opcode.WaitEffectLoad => None,
             Opcode.PlayEffect => None,
-            Opcode.SetAnimationFlipDirection => Unknown,
+            Opcode.SetAnimationFlipDirection => () => _(U16, U8, U16, OffOn),
             Opcode.Unknown8D => Invalid,
             Opcode.WaitDisplayChapter => None,
-            Opcode.Unknown8F => Unknown,
-            Opcode.WaitActivePanel => Unknown,
-            Opcode.DisplayMapTitle => Unknown,
-            Opcode._InflictStatus => Unknown,
-            Opcode.Unknown93 => Unknown,
-            Opcode.TeleportOut => Unknown,
+            Opcode.Unknown8F => () => _(U8),
+            Opcode.WaitActivePanel => () => _(U8, U8, U8),
+            Opcode.DisplayMapTitle => () => _(U8, U8, U8),
+            Opcode._InflictStatus => () => _(U16, U8, U16),
+            Opcode.Unknown93 => () => _(U16), // if (!read_eventflag(508)) write_eventflag(84, arg)
+            Opcode.TeleportOut => () => _(U16),
             Opcode.Unknown95 => Strange,
             Opcode._AppendMapState => None,
             Opcode.SetAnimationBrightColor => () => _(U16),
-            Opcode.TeleportIn => Unknown,
-            Opcode._BlueRemoveUnit => Unknown,
+            Opcode.TeleportIn => () => _(U16),
+            Opcode._BlueRemoveUnit => () => _(U16),
             Opcode.Unknown9A => Invalid,
             Opcode.Unknown9B => Invalid,
             Opcode.Unknown9C => Invalid,
@@ -242,7 +242,7 @@ namespace Gibbed.IvaliceChronicles.ScriptFormats
             Opcode.UnknownC7 => () => _(S32, S32, S32, S32),
             Opcode.UnknownC8 => () => _(S32, S32),
             Opcode.UnknownC9 => () => _(U8),
-            Opcode.UnknownCA => Unknown,
+            Opcode.UnknownCA => () => _(U8),
             Opcode.UnknownCB => () => _(U32, S32),
             Opcode.UnknownCC => () => _(S32, S32, S32),
             Opcode.UnknownCD => () => _(S32, U32),
@@ -250,59 +250,72 @@ namespace Gibbed.IvaliceChronicles.ScriptFormats
             Opcode.UnknownCF => None,
             Opcode.SeekCodeForwardIfZero => () => _(U8),
             Opcode.SeekCodeForward => () => _(U8),
-            Opcode.SeekCodeForwardTarget => Strange,
-            Opcode.SeekCodeBackward => Unknown,
-            Opcode.UnknownD4 => Unknown,
-            Opcode.SeekCodeBackwardTarget => Strange,
+            Opcode.SeekCodeForwardTarget => () => _(U8),
+            Opcode.SeekCodeBackward => () => _(U8),
+            Opcode.Terminate => () => _(U8), // unused arg?
+            Opcode.SeekCodeBackwardTarget => () => _(U8),
             Opcode.UnknownD6 => Invalid,
             Opcode.UnknownD7 => Invalid,
-            Opcode.UnknownD8 => Strange,
-            Opcode.UnknownD9 => Strange,
-            Opcode.UnknownDA => Strange,
+            Opcode.UnknownD8 => () => _(U8),
+            Opcode.UnknownD9 => () => _(U8),
+            Opcode.UnknownDA => Invalid,
             Opcode._EventEnd => None,
             Opcode.UnknownDC => None,
             Opcode.UnknownDD => Invalid,
             Opcode.UnknownDE => Invalid,
             Opcode.UnknownDF => Invalid,
-            Opcode.UnknownE0 => Strange,
+            Opcode.UnknownE0 => Invalid,
             Opcode.UnknownE1 => Invalid,
             Opcode.UnknownE2 => Invalid,
             Opcode._EventEnd2 => None,
             Opcode.UnknownE4 => Invalid,
-            Opcode._WaitForInstruction => Unknown,
+            Opcode._WaitForInstruction => () => _(U16),
             Opcode.UnknownE6 => Invalid,
             Opcode.UnknownE7 => () => _(U32),
-            Opcode.UnknownE8 => Unknown,
+            Opcode.UnknownE8 => () => _(U8),
             Opcode.UnknownE9 => () => _(U32, U32),
             Opcode.UnknownEA => () => _(U32, B8),
-            Opcode.UnknownEB => Unknown,
+            Opcode.UnknownEB => isEnhanced == false
+                ? () => _(U16, U16, U16)
+                : () => _(S32, S32, U16),
             Opcode.UnknownEC => None,
             Opcode.UnknownED => () => _(U32, U16),
             Opcode.UnknownEE => () => _(U32),
             Opcode.UnknownEF => None,
             Opcode.UnknownF0 => None,
-            Opcode._Wait => Unknown,
-            Opcode._Pad => Strange,
+            Opcode._Wait => () => _(U16),
+            Opcode._Pad => None,
             _ => throw new NotSupportedException(),
         };
 
-        private const GetDelegate Invalid = null;
-        private const GetDelegate Unknown = null;
-        private const GetDelegate Strange = null; // instructions that should be valid but are seemingly missing handlers in the main code
         private const GetDelegate None = null;
 
         private const GetDelegate Compare = null;
 
+        private static readonly GetDelegate Invalid = () => throw new NotSupportedException();
+        private static readonly GetDelegate Unknown = () => throw new NotSupportedException();
+
+        // instructions that should be valid but are seemingly missing handlers in the main code
+        private static readonly GetDelegate Strange = () => throw new NotSupportedException();
+
         private static readonly GetDelegate Math1 = () => _(U16);
         private static readonly GetDelegate Math2 = () => _(U16, U16);
+        private static readonly GetDelegate MoveSprite = () => _(U8, U8, S16, S16, S16, U8, U8, S16);
 
-        private const OperandType B8 = OperandType.GenericBool8;
-        private const OperandType S8 = OperandType.GenericInt8;
-        private const OperandType U8 = OperandType.GenericUInt8;
-        private const OperandType S16 = OperandType.GenericUInt16;
-        private const OperandType U16 = OperandType.GenericUInt16;
-        private const OperandType S32 = OperandType.GenericInt32;
-        private const OperandType U32 = OperandType.GenericUInt32;
+        public static bool IsUnknown(GetDelegate getter)
+        {
+            return getter == Invalid || getter == Unknown || getter == Strange;
+        }
+
+        private const OperandType B8 = OperandType.Bool8;
+        private const OperandType OnOff = OperandType.Bool8OnOff;
+        private const OperandType OffOn = OperandType.Bool8OffOn;
+        private const OperandType S8 = OperandType.Int8;
+        private const OperandType U8 = OperandType.UInt8;
+        private const OperandType S16 = OperandType.Int16;
+        private const OperandType U16 = OperandType.UInt16;
+        private const OperandType S32 = OperandType.Int32;
+        private const OperandType U32 = OperandType.UInt32;
 
         private static IEnumerable<OperandType> _(params OperandType[] operands)
         {
@@ -322,13 +335,28 @@ namespace Gibbed.IvaliceChronicles.ScriptFormats
         {
             foreach (Opcode opcode in Enum.GetValues(typeof(Opcode)))
             {
+                if (opcode == Opcode.UnknownE6)
+                {
+                    // dynamic size, so skip
+                    continue;
+                }
+
                 var getOperands = Get(opcode, isEnhanced);
-                if (getOperands == null)
+                if (getOperands == Invalid || getOperands == Unknown || getOperands == Strange)
                 {
                     continue;
                 }
 
                 var definedSize = opcode.GetSize(isEnhanced);
+                if (getOperands == null)
+                {
+                    if (definedSize > 0)
+                    {
+                        throw new InvalidOperationException($"{opcode} operands size non-zero but none specified");
+                    }
+                    continue;
+                }
+
                 int operandSize = 0;
                 foreach (var operandType in getOperands())
                 {
@@ -336,7 +364,7 @@ namespace Gibbed.IvaliceChronicles.ScriptFormats
                 }
                 if (operandSize != definedSize)
                 {
-                    throw new InvalidOperationException($"operand size mismatch in {(isEnhanced ? "enhanced" : "classic")}: {definedSize} vs {operandSize}");
+                    throw new InvalidOperationException($"{opcode} operand size mismatch in {(isEnhanced ? "enhanced" : "classic")}: {definedSize} vs {operandSize}");
                 }
             }
         }

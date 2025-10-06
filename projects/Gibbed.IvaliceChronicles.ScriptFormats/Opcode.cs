@@ -40,7 +40,7 @@ namespace Gibbed.IvaliceChronicles.ScriptFormats
         Unknown0D,
         Unknown0E,
         Unknown0F,
-        MessagePutMain, // 10
+        DisplayMessage, // 10
         AnimationRequest, // 11
         WaitAnimationEnd, // 12
         JumpMap, // 13 - same handler as 4C
@@ -153,7 +153,7 @@ namespace Gibbed.IvaliceChronicles.ScriptFormats
         WaitEventFlag, // 7E
         SetEventCharacterClut, // 7F
         RequestStandardAnimation, // 80
-        SetAnimationSoundOnOff, // 81
+        SetAnimationSound, // 81
         Unknown82, // 82
         _ChangeStats, // 83
         PlayJingle, // 84
@@ -236,7 +236,7 @@ namespace Gibbed.IvaliceChronicles.ScriptFormats
         SeekCodeForward, // D1
         SeekCodeForwardTarget, // D2
         SeekCodeBackward, // D3
-        UnknownD4, // D4
+        Terminate, // D4
         SeekCodeBackwardTarget, // D5
         UnknownD6,
         UnknownD7,

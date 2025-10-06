@@ -99,16 +99,20 @@ namespace Gibbed.IvaliceChronicles.DisassembleScript
                     Console.Write($"@{offset:D4} ");
                 }
 
-                Console.Write(opcode.ToString().PadRight(opcodePadding));
-
                 var size = opcode.GetSize(isEnhanced);
 
-                if (size > 0)
+                if (size == 0)
                 {
+                    Console.Write(opcode.ToString());
+                }
+                else
+                {
+                    Console.Write(opcode.ToString().PadRight(opcodePadding));
+
                     var operandsSpan = span.Slice(1, size);
 
                     var getOperands = Operands.Get(opcode, isEnhanced);
-                    if (getOperands == null)
+                    if (getOperands == null || Operands.IsUnknown(getOperands) == true)
                     {
                         Console.Write(" unknown:");
                         for (int i = 0; i < size; i++)
@@ -129,13 +133,15 @@ namespace Gibbed.IvaliceChronicles.DisassembleScript
                             }
                             object operand = operandType switch
                             {
-                                OperandType.GenericBool8 => operandsSpan.ReadValueB8(ref index),
-                                OperandType.GenericInt8 => operandsSpan.ReadValueS8(ref index),
-                                OperandType.GenericUInt8 => operandsSpan.ReadValueU8(ref index),
-                                OperandType.GenericInt16 => operandsSpan.ReadValueS16(ref index, endian),
-                                OperandType.GenericUInt16 => operandsSpan.ReadValueU16(ref index, endian),
-                                OperandType.GenericInt32 => operandsSpan.ReadValueS32(ref index, endian),
-                                OperandType.GenericUInt32 => operandsSpan.ReadValueU32(ref index, endian),
+                                OperandType.Bool8 => operandsSpan.ReadValueB8(ref index),
+                                OperandType.Bool8OnOff => operandsSpan.ReadValueB8(ref index) == true ? "on" : "off",
+                                OperandType.Bool8OffOn => operandsSpan.ReadValueB8(ref index) == true ? "off" : "on",
+                                OperandType.Int8 => operandsSpan.ReadValueS8(ref index),
+                                OperandType.UInt8 => operandsSpan.ReadValueU8(ref index),
+                                OperandType.Int16 => operandsSpan.ReadValueS16(ref index, endian),
+                                OperandType.UInt16 => operandsSpan.ReadValueU16(ref index, endian),
+                                OperandType.Int32 => operandsSpan.ReadValueS32(ref index, endian),
+                                OperandType.UInt32 => operandsSpan.ReadValueU32(ref index, endian),
                                 _ => throw new NotSupportedException(),
                             };
                             Console.Write($" {operand}");

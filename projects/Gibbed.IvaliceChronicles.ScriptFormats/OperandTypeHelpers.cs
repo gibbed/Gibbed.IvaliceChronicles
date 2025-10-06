@@ -28,13 +28,15 @@ namespace Gibbed.IvaliceChronicles.ScriptFormats
     {
         public static int GetSize(this OperandType type) => type switch
         {
-            OperandType.GenericBool8 or
-            OperandType.GenericInt8 or
-            OperandType.GenericUInt8 => 1,
-            OperandType.GenericInt16 or
-            OperandType.GenericUInt16 => 2,
-            OperandType.GenericInt32 or
-            OperandType.GenericUInt32 => 4,
+            OperandType.Bool8 or
+            OperandType.Bool8OnOff or
+            OperandType.Bool8OffOn or
+            OperandType.Int8 or
+            OperandType.UInt8 => 1,
+            OperandType.Int16 or
+            OperandType.UInt16 => 2,
+            OperandType.Int32 or
+            OperandType.UInt32 => 4,
             _ => throw new ArgumentOutOfRangeException(nameof(type)),
         };
     }

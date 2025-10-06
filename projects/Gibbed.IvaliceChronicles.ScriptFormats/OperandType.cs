@@ -24,12 +24,14 @@ namespace Gibbed.IvaliceChronicles.ScriptFormats
 {
     public enum OperandType
     {
-        GenericBool8,
-        GenericInt8,
-        GenericUInt8,
-        GenericInt16,
-        GenericUInt16,
-        GenericInt32,
-        GenericUInt32,
+        Bool8,
+        Bool8OnOff, // 1 = on, 0 = off
+        Bool8OffOn, // 0 = on, 1 = off
+        Int8,
+        UInt8,
+        Int16,
+        UInt16,
+        Int32,
+        UInt32,
     }
 }
