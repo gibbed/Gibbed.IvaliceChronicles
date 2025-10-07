@@ -34,7 +34,8 @@ namespace Gibbed.IvaliceChronicles.ScriptFormats
             OperandType.Int8 or
             OperandType.UInt8 => 1,
             OperandType.Int16 or
-            OperandType.UInt16 => 2,
+            OperandType.UInt16 or
+            OperandType.UInt16MessageIndex => 2,
             OperandType.Int32 or
             OperandType.UInt32 => 4,
             _ => throw new ArgumentOutOfRangeException(nameof(type)),

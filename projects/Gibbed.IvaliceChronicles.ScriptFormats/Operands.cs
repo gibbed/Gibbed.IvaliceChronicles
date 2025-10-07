@@ -53,7 +53,7 @@ namespace Gibbed.IvaliceChronicles.ScriptFormats
             Opcode.Unknown0E => Invalid,
             Opcode.Unknown0F => Invalid,
             Opcode.DisplayMessage => () => isEnhanced == false
-                ? _(U8, U8, U16, U8, U8, U8, S16, S16, S16, U8)
+                ? _(U8, U8, MessageIndex, U8, U8, U8, S16, S16, S16, U8)
                 : _(U8, U8, U32, U8, U8, U8, S16, S16, S16, U8, U8),
             Opcode.AnimationRequest => () => _(U16, U16, U8), // FFHacktics wiki claims 4 bytes, but size is 5?
             Opcode.WaitAnimationEnd => () => _(U16),
@@ -120,7 +120,7 @@ namespace Gibbed.IvaliceChronicles.ScriptFormats
             Opcode.SetDaytime => () => _(U8),
             Opcode.SetFace => () => _(U8),
             Opcode._ChangeDialog => isEnhanced == false
-                ? () => _(U8, U16, U16)
+                ? () => _(U8, S16, U16)
                 : () => _(U8, S32, U16),
             Opcode.Unknown52 => Invalid,
             Opcode.Direction2_1 => () => _(U8, U8, U8, U8, U8, U8, U8),
@@ -314,6 +314,7 @@ namespace Gibbed.IvaliceChronicles.ScriptFormats
         private const OperandType U8 = OperandType.UInt8;
         private const OperandType S16 = OperandType.Int16;
         private const OperandType U16 = OperandType.UInt16;
+        private const OperandType MessageIndex = OperandType.UInt16MessageIndex;
         private const OperandType S32 = OperandType.Int32;
         private const OperandType U32 = OperandType.UInt32;
 

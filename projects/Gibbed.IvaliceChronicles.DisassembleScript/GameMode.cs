@@ -20,19 +20,12 @@
  *    distribution.
  */
 
-namespace Gibbed.IvaliceChronicles.ScriptFormats
+namespace Gibbed.IvaliceChronicles.DisassembleScript
 {
-    public enum OperandType
+    internal enum GameMode
     {
-        Bool8,
-        Bool8OnOff, // 1 = on, 0 = off
-        Bool8OffOn, // 0 = on, 1 = off
-        Int8,
-        UInt8,
-        Int16,
-        UInt16,
-        UInt16MessageIndex,
-        Int32,
-        UInt32,
+        FFTPack, // original data from mobile
+        Classic,
+        Enhanced,
     }
 }
