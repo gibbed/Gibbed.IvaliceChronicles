@@ -26,7 +26,11 @@ namespace Gibbed.IvaliceChronicles.ScriptFormats
 {
     public static class OpcodeHelpers
     {
-        public static int GetClassicSize(this Opcode opcode) => opcode switch
+        public static int GetSize(this Opcode opcode, bool isEnhanced) => isEnhanced == false
+            ? opcode.GetClassicSize()
+            : opcode.GetEnhancedSize();
+
+        private static int GetClassicSize(this Opcode opcode) => opcode switch
         {
             Opcode.Unknown00 => 0,
             Opcode.Unknown01 => 0,
@@ -274,18 +278,14 @@ namespace Gibbed.IvaliceChronicles.ScriptFormats
             _ => throw new ArgumentOutOfRangeException(nameof(opcode)),
         };
 
-        public static int GetEnhancedSize(this Opcode opcode) => GetClassicSize(opcode) + GetEnhancedExtraSize(opcode);
+        private static int GetEnhancedSize(this Opcode opcode) => GetClassicSize(opcode) + GetEnhancedSizeDelta(opcode);
 
-        public static int GetEnhancedExtraSize(this Opcode opcode) => opcode switch
+        private static int GetEnhancedSizeDelta(this Opcode opcode) => opcode switch
         {
             Opcode.DisplayMessage => 3,
             Opcode._ChangeDialog => 2,
             Opcode.UnknownEB => 4,
             _ => 0,
         };
-
-        public static int GetSize(this Opcode opcode, bool isEnhanced) => isEnhanced == false
-            ? opcode.GetClassicSize()
-            : opcode.GetEnhancedSize();
     }
 }
