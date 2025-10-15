@@ -190,16 +190,16 @@ namespace Gibbed.IvaliceChronicles.ScriptFormats
         NotEquals, // A3
         LessThan, // A4
         GreaterThan, // A5
-        UnknownA6,
-        UnknownA7,
-        UnknownA8,
-        UnknownA9,
-        UnknownAA,
-        UnknownAB,
-        UnknownAC,
-        UnknownAD,
-        UnknownAE,
-        UnknownAF,
+        UnknownA6, // A6
+        UnknownA7, // A7
+        UnknownA8, // A8
+        UnknownA9, // A9
+        UnknownAA, // AA
+        UnknownAB, // AB
+        UnknownAC, // AC
+        UnknownAD, // AD
+        UnknownAE, // AE
+        UnknownAF, // AF
         Add, // B0
         AddVar, // B1
         Sub, // B2
@@ -238,32 +238,32 @@ namespace Gibbed.IvaliceChronicles.ScriptFormats
         SeekCodeBackward, // D3
         Terminate, // D4
         SeekCodeBackwardTarget, // D5
-        UnknownD6,
-        UnknownD7,
-        UnknownD8,
-        UnknownD9,
-        UnknownDA,
+        UnknownD6, // D6
+        UnknownD7, // D7
+        UnknownD8, // D8
+        UnknownD9, // D9
+        UnknownDA, // DA
         _EventEnd, // DB - same handler as E3
         UnknownDC, // DC - errorf = 13; unused?
-        UnknownDD,
-        UnknownDE,
-        UnknownDF,
-        UnknownE0,
-        UnknownE1,
-        UnknownE2,
+        UnknownDD, // DD
+        UnknownDE, // DE
+        UnknownDF, // DF
+        UnknownE0, // E0
+        UnknownE1, // E1
+        UnknownE2, // E2
         _EventEnd2, // E3 - same handler as DB
-        UnknownE4,
+        UnknownE4, // E4
         _WaitForInstruction, // E5
-        UnknownE6,
-        UnknownE7,
-        UnknownE8,
-        UnknownE9,
-        UnknownEA,
-        UnknownEB,
-        UnknownEC,
-        UnknownED,
-        UnknownEE,
-        UnknownEF,
+        UnknownE6, // E6
+        UnknownE7, // E7
+        UnknownE8, // E8
+        UnknownE9, // E9
+        UnknownEA, // EA
+        UnknownEB, // EB
+        UnknownEC, // EC
+        UnknownED, // ED
+        UnknownEE, // EE
+        UnknownEF, // EF
         UnknownF0, // F0 - same handler as 22
         _Wait, // F1
         _Pad, // F2
