@@ -243,7 +243,7 @@ namespace Gibbed.IvaliceChronicles.ScriptFormats
             Opcode.UnknownC8 => () => _(S32, S32),
             Opcode.UnknownC9 => () => _(U8),
             Opcode.UnknownCA => () => _(U8),
-            Opcode.UnknownCB => () => _(U32, S32),
+            Opcode.ChangePostEffectGlare => () => _(U32, S32),
             Opcode.UnknownCC => () => _(S32, S32, S32),
             Opcode.UnknownCD => () => _(S32, U32),
             Opcode.UnknownCE => () => _(B8),

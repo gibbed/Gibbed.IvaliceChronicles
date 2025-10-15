@@ -231,7 +231,7 @@ namespace Gibbed.IvaliceChronicles.ScriptFormats
             Opcode.UnknownC8 => 8,
             Opcode.UnknownC9 => 1,
             Opcode.UnknownCA => 1,
-            Opcode.UnknownCB => 8,
+            Opcode.ChangePostEffectGlare => 8,
             Opcode.UnknownCC => 12,
             Opcode.UnknownCD => 8,
             Opcode.UnknownCE => 1,
