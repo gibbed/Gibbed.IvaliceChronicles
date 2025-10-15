@@ -197,8 +197,8 @@ namespace Gibbed.IvaliceChronicles.ScriptFormats
         UnknownAA, // AA
         UnknownAB, // AB
         UnknownAC, // AC
-        UnknownAD, // AD
-        UnknownAE, // AE
+        ChangePostEffectDepthLUT, // AD
+        ChangePostEffectLUT, // AE
         UnknownAF, // AF
         Add, // B0
         AddVar, // B1
@@ -221,13 +221,13 @@ namespace Gibbed.IvaliceChronicles.ScriptFormats
         UnknownC2, // C2
         UnknownC3, // C3
         UnknownC4, // C4
-        UnknownC5, // C5
+        ChangeDepthOfField, // C5
         UnknownC6, // C6
         UnknownC7, // C7
         UnknownC8, // C8
         UnknownC9, // C9
         UnknownCA, // CA
-        UnknownCB, // CB
+        ChangePostEffectGlare, // CB
         UnknownCC, // CC
         UnknownCD, // CD
         UnknownCE, // CE
@@ -255,7 +255,7 @@ namespace Gibbed.IvaliceChronicles.ScriptFormats
         UnknownE4, // E4
         _WaitForInstruction, // E5
         UnknownE6, // E6
-        UnknownE7, // E7
+        DisplayCaption, // E7
         UnknownE8, // E8
         UnknownE9, // E9
         UnknownEA, // EA
