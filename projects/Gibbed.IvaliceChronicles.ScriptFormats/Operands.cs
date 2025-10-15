@@ -34,7 +34,7 @@ namespace Gibbed.IvaliceChronicles.ScriptFormats
 
         public delegate IEnumerable<OperandType> GetDelegate();
 
-        public static GetDelegate Get(this Opcode opcode, bool isEnhanced) => opcode switch
+        public static GetDelegate Get(this Opcode opcode, ScriptMode mode) => opcode switch
         {
             Opcode.Unknown00 => Invalid,
             Opcode.Unknown01 => Invalid,
@@ -52,9 +52,12 @@ namespace Gibbed.IvaliceChronicles.ScriptFormats
             Opcode.Unknown0D => Invalid,
             Opcode.Unknown0E => Invalid,
             Opcode.Unknown0F => Invalid,
-            Opcode.DisplayMessage => () => isEnhanced == false
-                ? _(U8, U8, MessageIndex, U8, U8, U8, S16, S16, S16, U8)
-                : _(U8, U8, U32, U8, U8, U8, S16, S16, S16, U8, U8),
+            Opcode.DisplayMessage => mode switch
+            {
+                ScriptMode.Classic => () => _(U8, U8, MessageIndex, U8, U8, U8, S16, S16, S16, U8),
+                ScriptMode.Enhanced => () => _(U8, U8, U32, U8, U8, U8, S16, S16, S16, U8, U8),
+                _ => throw new NotSupportedException(),
+            },
             Opcode.AnimationRequest => () => _(U16, U16, U8), // FFHacktics wiki claims 4 bytes, but size is 5?
             Opcode.WaitAnimationEnd => () => _(U16),
             Opcode.JumpMap => () => _(U8, U8),
@@ -119,9 +122,12 @@ namespace Gibbed.IvaliceChronicles.ScriptFormats
             Opcode.SetAnimationShadow => () => _(U8, U8, U8),
             Opcode.SetDaytime => () => _(U8),
             Opcode.SetFace => () => _(U8),
-            Opcode._ChangeDialog => isEnhanced == false
-                ? () => _(U8, S16, U16)
-                : () => _(U8, S32, U16),
+            Opcode._ChangeDialog => mode switch
+            {
+                ScriptMode.Classic => () => _(U8, S16, U16),
+                ScriptMode.Enhanced => () => _(U8, S32, U16),
+                _ => throw new NotSupportedException(),
+            },
             Opcode.Unknown52 => Invalid,
             Opcode.Direction2_1 => () => _(U8, U8, U8, U8, U8, U8, U8),
             Opcode.StartModelAnimation => () => _(U8, U8),
@@ -275,9 +281,12 @@ namespace Gibbed.IvaliceChronicles.ScriptFormats
             Opcode.UnknownE8 => () => _(U8),
             Opcode.UnknownE9 => () => _(U32, U32),
             Opcode.UnknownEA => () => _(U32, B8),
-            Opcode.UnknownEB => isEnhanced == false
-                ? () => _(U16, U16, U16)
-                : () => _(S32, S32, U16),
+            Opcode.UnknownEB => mode switch
+            {
+                ScriptMode.Classic => () => _(U16, U16, U16),
+                ScriptMode.Enhanced => () => _(S32, S32, U16),
+                _ => throw new NotSupportedException(),
+            },
             Opcode.UnknownEC => None,
             Opcode.UnknownED => () => _(U32, U16),
             Opcode.UnknownEE => () => _(U32),
@@ -328,11 +337,11 @@ namespace Gibbed.IvaliceChronicles.ScriptFormats
 
         public static void SanityCheck()
         {
-            SanityCheck(true);
-            SanityCheck(false);
+            SanityCheck(ScriptMode.Enhanced);
+            SanityCheck(ScriptMode.Classic);
         }
 
-        internal static void SanityCheck(bool isEnhanced)
+        internal static void SanityCheck(ScriptMode mode)
         {
             foreach (Opcode opcode in Enum.GetValues(typeof(Opcode)))
             {
@@ -342,13 +351,13 @@ namespace Gibbed.IvaliceChronicles.ScriptFormats
                     continue;
                 }
 
-                var getOperands = Get(opcode, isEnhanced);
+                var getOperands = Get(opcode, mode);
                 if (getOperands == Invalid || getOperands == Unknown || getOperands == Strange)
                 {
                     continue;
                 }
 
-                var definedSize = opcode.GetSize(isEnhanced);
+                var definedSize = opcode.GetSize(mode);
                 if (getOperands == null)
                 {
                     if (definedSize > 0)
@@ -365,7 +374,7 @@ namespace Gibbed.IvaliceChronicles.ScriptFormats
                 }
                 if (operandSize != definedSize)
                 {
-                    throw new InvalidOperationException($"{opcode} operand size mismatch in {(isEnhanced ? "enhanced" : "classic")}: {definedSize} vs {operandSize}");
+                    throw new InvalidOperationException($"{opcode} operand size mismatch in {mode}: {definedSize} vs {operandSize}");
                 }
             }
         }

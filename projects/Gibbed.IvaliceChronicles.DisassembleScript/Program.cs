@@ -125,8 +125,16 @@ namespace Gibbed.IvaliceChronicles.DisassembleScript
                 }
             }
 
-            DumpBody(scriptSpan, isEnhanced: mode == GameMode.Enhanced, messages, opcodePadding: opcodePadding, showOffset: showOffset);
+            DumpBody(scriptSpan, ToScriptMode(mode), messages, opcodePadding, showOffset);
         }
+
+        private static ScriptMode ToScriptMode(GameMode mode) => mode switch
+        {
+            GameMode.FFTPack or
+            GameMode.Classic => ScriptMode.Classic,
+            GameMode.Enhanced => ScriptMode.Enhanced,
+            _ => throw new NotSupportedException(),
+        };
 
         private static string[] ReadMessages(ReadOnlySpan<byte> span)
         {
@@ -168,7 +176,7 @@ namespace Gibbed.IvaliceChronicles.DisassembleScript
 
         private static void DumpBody(
             ReadOnlySpan<byte> span,
-            bool isEnhanced,
+            ScriptMode mode,
             string[] messages,
             int opcodePadding,
             bool showOffset)
@@ -185,7 +193,7 @@ namespace Gibbed.IvaliceChronicles.DisassembleScript
                     Console.Write($"@{offset:D4} ");
                 }
 
-                var size = opcode.GetSize(isEnhanced);
+                var size = opcode.GetSize(mode);
 
                 if (size == 0)
                 {
@@ -197,7 +205,7 @@ namespace Gibbed.IvaliceChronicles.DisassembleScript
 
                     var operandsSpan = span.Slice(offset + 1, size);
 
-                    var getOperands = Operands.Get(opcode, isEnhanced);
+                    var getOperands = Operands.Get(opcode, mode);
                     if (getOperands == null || Operands.IsUnknown(getOperands) == true)
                     {
                         Console.Write(" unknown:");
@@ -254,6 +262,8 @@ namespace Gibbed.IvaliceChronicles.DisassembleScript
             }
         }
 
+        // https://ffhacktics.com/wiki/Font
+        // https://ffhacktics.com/wiki/Text_Format
         private static string DecodeMessage(ReadOnlySpan<byte> span)
         {
             StringBuilder sb = new();

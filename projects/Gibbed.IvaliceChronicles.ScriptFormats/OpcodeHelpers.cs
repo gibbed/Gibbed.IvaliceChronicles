@@ -26,9 +26,12 @@ namespace Gibbed.IvaliceChronicles.ScriptFormats
 {
     public static class OpcodeHelpers
     {
-        public static int GetSize(this Opcode opcode, bool isEnhanced) => isEnhanced == false
-            ? opcode.GetClassicSize()
-            : opcode.GetEnhancedSize();
+        public static int GetSize(this Opcode opcode, ScriptMode mode) => mode switch
+        {
+            ScriptMode.Classic => opcode.GetClassicSize(),
+            ScriptMode.Enhanced => opcode.GetEnhancedSize(),
+            _ => throw new NotSupportedException(),
+        };
 
         private static int GetClassicSize(this Opcode opcode) => opcode switch
         {
